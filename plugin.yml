@@ -5,3 +5,8 @@ author: PG Dev Team
 authors: [Devil Boy]
 description: Allows normal users to disguise themselves as mobs for CommandPoints!
 depend: [CommandPoints, MobDisguise]
+
+permissions:
+    CPMD.disguise.free:
+        default: op
+        description: Is allowed to disguise for free.

@@ -1,0 +1,35 @@
+#
+# CP-MD Bridge Configuration
+#
+
+# Disguise costs
+#	Set to -1 if you want to disallow.
+creeper=1
+skeleton=1
+spider=1
+giant=1
+zombie=1
+slime=1
+ghast=1
+pigman=1
+enderman=1
+cavespider=1
+silverfish=1
+blaze=1
+magmacube=1
+enderdragon=1
+pig=1
+sheep=1
+cow=1
+chicken=1
+squid=1
+wolf=1
+mooshroom=1
+snowgolem=1
+villager=1
+
+# Player disguise
+#	Set this to something other than -1
+#	if you wish to allow players to
+#	disguise as one another.
+player=-1
