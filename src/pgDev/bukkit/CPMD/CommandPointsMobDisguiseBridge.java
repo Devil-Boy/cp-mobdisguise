@@ -25,6 +25,7 @@ import pgDev.bukkit.CommandPoints.*;
 public class CommandPointsMobDisguiseBridge extends JavaPlugin {
 	// Listeners
     private final MDEventListener mdEventListener = new MDEventListener(this);
+    private final CPMDPlayerListener playerListener = new CPMDPlayerListener(this);
     
     // File Locations
     String pluginMainDir = "./plugins/CommandPointsMobDisguiseBridge";
@@ -78,8 +79,10 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
     		mobTypeList.add(type);
     	}*/
     	
+        // Register events
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvent(Event.Type.CUSTOM_EVENT, mdEventListener, Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
         
         // Integrations turn on!
         checkCPandMD();

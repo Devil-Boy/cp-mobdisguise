@@ -3,7 +3,9 @@
 #
 
 # Disguise costs
-#	Set to -1 if you want to disallow.
+#	Here you set the amount of
+#	points needed to disguise
+#	 as each mob.
 creeper=1
 skeleton=1
 spider=1
@@ -28,8 +30,14 @@ mooshroom=1
 snowgolem=1
 villager=1
 
-# Player disguise
-#	Set this to something other than -1
-#	if you wish to allow players to
-#	disguise as one another.
-player=-1
+# Player disguise cost
+#	If you don't want players to
+#	disguise as each other, edit
+#	the permissions in MobDisguise.
+player=1
+
+# Undisguise on exit
+#	Here you decide whether or not
+#	players are undisguised when they
+#	leave the server.
+undisguiseOnExit=true

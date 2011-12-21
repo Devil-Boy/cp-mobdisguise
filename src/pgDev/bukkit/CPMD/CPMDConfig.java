@@ -14,13 +14,14 @@ public class CPMDConfig {
 	
 	// List of Config Options
 	HashMap<String, Integer> disguiseCosts = new HashMap<String, Integer>();
+	boolean undisguiseOnExit;
 	
 	public CPMDConfig(Properties p, CommandPointsMobDisguiseBridge plugin) {
         properties = p;
         this.plugin = plugin;
         
         // Grab values here.
-        disguiseCosts.put("player", getInt("player", -1));
+        disguiseCosts.put("player", getInt("player", 1));
         disguiseCosts.put("creeper", getInt("creeper", 1));
         disguiseCosts.put("skeleton", getInt("skeleton", 1));
         disguiseCosts.put("spider", getInt("spider", 1));
@@ -28,7 +29,7 @@ public class CPMDConfig {
         disguiseCosts.put("zombie", getInt("zombie", 1));
         disguiseCosts.put("slime", getInt("slime", 1));
         disguiseCosts.put("ghast", getInt("ghast", 1));
-        disguiseCosts.put("pigman", getInt("epigman", 1));
+        disguiseCosts.put("pigman", getInt("pigman", 1));
         disguiseCosts.put("enderman", getInt("enderman", 1));
         disguiseCosts.put("cavespider", getInt("cavespider", 1));
         disguiseCosts.put("silverfish", getInt("silverfish", 1));
@@ -44,6 +45,7 @@ public class CPMDConfig {
         disguiseCosts.put("mooshroom", getInt("mooshroom", 1));
         disguiseCosts.put("snowgolem", getInt("snowgolem", 1));
         disguiseCosts.put("villager", getInt("villager", 1));
+        undisguiseOnExit = getBoolean("undisguiseOnExit", true);
         
 	}
 	
@@ -164,7 +166,9 @@ public class CPMDConfig {
     		out.write("#\r\n");
     		out.write("\r\n");
     		out.write("# Disguise costs\r\n");
-    		out.write("#	Set to -1 if you want to disallow.\r\n");
+    		out.write("#	Here you set the amount of\r\n");
+    		out.write("#	points needed to disguise\r\n");
+    		out.write("#	 as each mob.\r\n");
     		out.write("creeper=" + disguiseCosts.get("creeper") + "\r\n");
     		out.write("skeleton=" + disguiseCosts.get("skeleton") + "\r\n");
     		out.write("spider=" + disguiseCosts.get("spider") + "\r\n");
@@ -189,11 +193,17 @@ public class CPMDConfig {
     		out.write("snowgolem=" + disguiseCosts.get("snowgolem") + "\r\n");
     		out.write("villager=" + disguiseCosts.get("villager") + "\r\n");
     		out.write("\r\n");
-    		out.write("# Player disguise\r\n");
-    		out.write("#	Set this to something other than -1\r\n");
-    		out.write("#	if you wish to allow players to\r\n");
-    		out.write("#	disguise as one another.\r\n");
+    		out.write("# Player disguise cost\r\n");
+    		out.write("#	If you don't want players to\r\n");
+    		out.write("#	disguise as each other, edit\r\n");
+    		out.write("#	the permissions in MobDisguise.\r\n");
     		out.write("player=" + disguiseCosts.get("player") + "\r\n");
+    		out.write("\r\n");
+    		out.write("# Undisguise on exit\r\n");
+    		out.write("#	Here you decide whether or not\r\n");
+    		out.write("#	players are undisguised when they\r\n");
+    		out.write("#	leave the server.\r\n");
+    		out.write("undisguiseOnExit=" + undisguiseOnExit + "\r\n");
     		out.close();
     	} catch (Exception e) {
     		System.out.println(e);
