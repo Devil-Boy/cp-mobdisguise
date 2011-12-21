@@ -41,3 +41,5 @@ player=1
 #	players are undisguised when they
 #	leave the server.
 undisguiseOnExit=true
+
+#Test edit
