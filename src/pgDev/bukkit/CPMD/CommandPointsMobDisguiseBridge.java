@@ -81,8 +81,8 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
     	
         // Register events
         PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.CUSTOM_EVENT, mdEventListener, Priority.Normal, this);
-        pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Priority.Normal, this);
+        pm.registerEvents(mdEventListener, this);
+        pm.registerEvents(playerListener, this);
         
         // Integrations turn on!
         checkCPandMD();

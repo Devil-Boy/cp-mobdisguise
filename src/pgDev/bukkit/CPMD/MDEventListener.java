@@ -1,7 +1,7 @@
 package pgDev.bukkit.CPMD;
 
 import org.bukkit.ChatColor;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 
 import me.desmin88.mobdisguise.api.MobDisguiseListener;
 import me.desmin88.mobdisguise.api.event.*;
@@ -14,6 +14,7 @@ public class MDEventListener extends MobDisguiseListener implements Listener {
 	}
 	
 	// Listen Methods
+	@EventHandler
 	public void onDisguiseAsMob(DisguiseAsMobEvent event) {
 		if (!plugin.hasPermissions(event.getPlayer(), "CPMD.disguise.free")) {
 			if (plugin.cpAPI.hasAccount(event.getPlayer().getName(), plugin)) {
@@ -36,6 +37,7 @@ public class MDEventListener extends MobDisguiseListener implements Listener {
 		}
 	}
 	
+	@EventHandler
 	public void onDisguiseAsPlayer(DisguiseAsPlayerEvent event) {
 		if (!plugin.hasPermissions(event.getPlayer(), "CPMD.disguise.free")) {
 			if (plugin.cpAPI.hasAccount(event.getPlayer().getName(), plugin)) {
@@ -60,7 +62,7 @@ public class MDEventListener extends MobDisguiseListener implements Listener {
 	
 	public void onUnDisguise(UnDisguiseEvent event) {
 	}
-	
+
 	public void onMobDisguiseCommand(DisguiseCommandEvent event) {
 		/* Better method found
 		// Player check
