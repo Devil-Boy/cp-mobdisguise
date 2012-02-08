@@ -1,6 +1,6 @@
 name: CommandPointsMobDisguiseBridge
 main: pgDev.bukkit.CPMD.CommandPointsMobDisguiseBridge
-version: 1.0
+version: 1.1
 author: PG Dev Team
 authors: [Devil Boy]
 description: Allows normal users to disguise themselves as mobs for CommandPoints!
