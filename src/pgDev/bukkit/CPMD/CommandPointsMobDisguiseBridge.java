@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Priority;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,7 +13,10 @@ import org.bukkit.plugin.PluginManager;
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
 
+import pgDev.bukkit.DisguiseCraft.*;
+import pgDev.bukkit.DisguiseCraft.api.DisguiseCraftAPI;
 import pgDev.bukkit.CommandPoints.*;
+
 
 /**
  * CommandPointsMobDisguiseBridge for Bukkit
@@ -25,6 +26,7 @@ import pgDev.bukkit.CommandPoints.*;
 public class CommandPointsMobDisguiseBridge extends JavaPlugin {
 	// Listeners
     private final MDEventListener mdEventListener = new MDEventListener(this);
+    private final DCEventListener dcEventListener = new DCEventListener(this);
     private final CPMDPlayerListener playerListener = new CPMDPlayerListener(this);
     
     // File Locations
@@ -41,6 +43,9 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
     // CommandPoints API
     CommandPointsAPI cpAPI;
     
+    // DisguiseCraft API
+    DisguiseCraftAPI dcAPI;
+    
     // Permissions Integration
     private static PermissionHandler Permissions;
     
@@ -52,6 +57,7 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
 			if (dirCreation) {
 				System.out.println("New CommandPointsMobDisguiseBridge directory created!");
 			}
+			
 		}
 		
     	// Load the Configuration
@@ -78,19 +84,27 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
     	for (String type: mobTypes.split(",")) {
     		mobTypeList.add(type);
     	}*/
-    	
-        // Register events
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(mdEventListener, this);
-        pm.registerEvents(playerListener, this);
         
         // Integrations turn on!
         checkCPandMD();
     	setupPermissions();
     	
-        // "All is well!" Output
-        PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
+    	if (this.isEnabled()) {
+    		// Register events
+            PluginManager pm = getServer().getPluginManager();
+            if (dcAPI == null) {
+            	pm.registerEvents(mdEventListener, this);
+            } else {
+            	pm.registerEvents(dcEventListener, this);
+            }
+            pm.registerEvents(playerListener, this);
+        	
+            // "All is well!" Output
+            PluginDescriptionFile pdfFile = this.getDescription();
+            System.out.println( pdfFile.getName() + " version " + pdfFile.getVersion() + " is enabled!" );
+    	} else {
+    		System.out.println("CommandPointsMobDisguiseBridge could not be enabled!");
+    	}
     }
     public void onDisable() {
         // "We done well..." Output
@@ -101,16 +115,18 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
         Plugin commandPoints = getServer().getPluginManager().getPlugin("CommandPoints");
         Plugin mobDisguise = getServer().getPluginManager().getPlugin("MobDisguise");
         
-        if (mobDisguise == null) {
-        	System.out.println("MobDisguise was not found on this server.");
-        	getServer().getPluginManager().disablePlugin(this);
+        dcAPI = DisguiseCraft.getAPI();
+        
+        if (commandPoints != null) {
+            cpAPI = ((CommandPoints)commandPoints).getAPI();
         } else {
-	        if (commandPoints != null) {
-	            cpAPI = ((CommandPoints)commandPoints).getAPI();
-	        } else {
-	        	System.out.println("CommandPoints was not found on this server.");
-	        	getServer().getPluginManager().disablePlugin(this);
-	        }
+        	System.out.println("CommandPoints was not found on this server!");
+        	getServer().getPluginManager().disablePlugin(this);
+        }
+        
+        if (dcAPI == null && mobDisguise == null) {
+        	System.out.println("Neither MobDisguise nor DisguiseCraft was found on this server!");
+        	getServer().getPluginManager().disablePlugin(this);
         }
     }
     
@@ -133,5 +149,7 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
             return player.hasPermission(node);
         }
     }
+    
+
 }
 

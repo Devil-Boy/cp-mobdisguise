@@ -30,6 +30,7 @@ public class CPMDConfig {
         disguiseCosts.put("slime", getInt("slime", 1));
         disguiseCosts.put("ghast", getInt("ghast", 1));
         disguiseCosts.put("pigman", getInt("pigman", 1));
+        disguiseCosts.put("pigzombie", getInt("pigman", 1));
         disguiseCosts.put("enderman", getInt("enderman", 1));
         disguiseCosts.put("cavespider", getInt("cavespider", 1));
         disguiseCosts.put("silverfish", getInt("silverfish", 1));
@@ -43,8 +44,14 @@ public class CPMDConfig {
         disguiseCosts.put("squid", getInt("squid", 1));
         disguiseCosts.put("wolf", getInt("wolf", 1));
         disguiseCosts.put("mooshroom", getInt("mooshroom", 1));
+        disguiseCosts.put("mushroomcow", getInt("mooshroom", 1));
         disguiseCosts.put("snowgolem", getInt("snowgolem", 1));
+        disguiseCosts.put("snowman", getInt("snowgolem", 1));
         disguiseCosts.put("villager", getInt("villager", 1));
+        disguiseCosts.put("ocelot", getInt("ocelot", 1));
+        disguiseCosts.put("cat", getInt("ocelot", 1));
+        disguiseCosts.put("irongolem", getInt("irongolem", 1));
+        
         undisguiseOnExit = getBoolean("undisguiseOnExit", true);
         
 	}
@@ -192,6 +199,8 @@ public class CPMDConfig {
     		out.write("mooshroom=" + disguiseCosts.get("mooshroom") + "\r\n");
     		out.write("snowgolem=" + disguiseCosts.get("snowgolem") + "\r\n");
     		out.write("villager=" + disguiseCosts.get("villager") + "\r\n");
+    		out.write("ocelot=" + disguiseCosts.get("ocelot") + "\r\n");
+    		out.write("irongolem=" + disguiseCosts.get("irongolem") + "\r\n");
     		out.write("\r\n");
     		out.write("# Player disguise cost\r\n");
     		out.write("#	If you don't want players to\r\n");
