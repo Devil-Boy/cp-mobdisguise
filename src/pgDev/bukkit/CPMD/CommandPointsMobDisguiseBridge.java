@@ -124,7 +124,7 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
         	getServer().getPluginManager().disablePlugin(this);
         }
         
-        if (dcAPI != null) {
+        if (disguiseCraft != null) {
         	dcAPI = ((DisguiseCraft) disguiseCraft).getAPI();
         } else if (mobDisguise == null) {
         	System.out.println("Neither MobDisguise nor DisguiseCraft was found on this server!");
