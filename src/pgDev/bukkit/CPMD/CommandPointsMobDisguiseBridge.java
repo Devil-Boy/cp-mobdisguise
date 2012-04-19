@@ -44,7 +44,7 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
     CommandPointsAPI cpAPI;
     
     // DisguiseCraft API
-    DisguiseCraftAPI dcAPI;
+    DisguiseCraftAPI dcAPI = null;
     
     // Permissions Integration
     private static PermissionHandler Permissions;
@@ -111,11 +111,11 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
         System.out.println("CommandPointsMobDisguiseBridge disabled!");
     }
     
-    private void checkCPandMD() {
+    @SuppressWarnings("static-access")
+	private void checkCPandMD() {
         Plugin commandPoints = getServer().getPluginManager().getPlugin("CommandPoints");
         Plugin mobDisguise = getServer().getPluginManager().getPlugin("MobDisguise");
-        
-        dcAPI = DisguiseCraft.getAPI();
+        Plugin disguiseCraft = getServer().getPluginManager().getPlugin("DisguiseCraft");
         
         if (commandPoints != null) {
             cpAPI = ((CommandPoints)commandPoints).getAPI();
@@ -124,7 +124,9 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
         	getServer().getPluginManager().disablePlugin(this);
         }
         
-        if (dcAPI == null && mobDisguise == null) {
+        if (dcAPI != null) {
+        	dcAPI = ((DisguiseCraft) disguiseCraft).getAPI();
+        } else if (mobDisguise == null) {
         	System.out.println("Neither MobDisguise nor DisguiseCraft was found on this server!");
         	getServer().getPluginManager().disablePlugin(this);
         }
