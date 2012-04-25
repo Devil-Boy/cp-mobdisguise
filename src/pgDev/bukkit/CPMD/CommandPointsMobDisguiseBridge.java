@@ -27,7 +27,6 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
 	// Listeners
     private final MDEventListener mdEventListener = new MDEventListener(this);
     private final DCEventListener dcEventListener = new DCEventListener(this);
-    private final CPMDPlayerListener playerListener = new CPMDPlayerListener(this);
     
     // File Locations
     String pluginMainDir = "./plugins/CommandPointsMobDisguiseBridge";
@@ -97,7 +96,6 @@ public class CommandPointsMobDisguiseBridge extends JavaPlugin {
             } else {
             	pm.registerEvents(dcEventListener, this);
             }
-            pm.registerEvents(playerListener, this);
         	
             // "All is well!" Output
             PluginDescriptionFile pdfFile = this.getDescription();

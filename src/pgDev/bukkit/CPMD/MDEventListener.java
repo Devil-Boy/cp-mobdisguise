@@ -2,7 +2,9 @@ package pgDev.bukkit.CPMD;
 
 import org.bukkit.ChatColor;
 import org.bukkit.event.*;
+import org.bukkit.event.player.PlayerQuitEvent;
 
+import me.desmin88.mobdisguise.api.MobDisguiseAPI;
 import me.desmin88.mobdisguise.api.event.*;
 
 public class MDEventListener implements Listener {
@@ -57,6 +59,13 @@ public class MDEventListener implements Listener {
 					event.setCancelled(true);
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event) {
+		if (plugin.pluginSettings.undisguiseOnExit && MobDisguiseAPI.isDisguised(event.getPlayer())) {
+			MobDisguiseAPI.undisguisePlayer(event.getPlayer());
 		}
 	}
 }
